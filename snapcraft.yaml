@@ -1,4 +1,5 @@
 name: subiquity
+base: core18
 version: git
 summary: Ubuntu installer
 description: The Ubuntu server installer
@@ -28,7 +29,8 @@ parts:
     source-type: git
     source: git://git.launchpad.net/curtin
     source-commit: bf03e4f78744449a7dc45f4cff2134ef3b989a3b
-    requirements: requirements.txt
+    requirements:
+     - requirements.txt
     organize:
       'lib/python*/site-packages/usr/lib/curtin': 'usr/lib/'
     stage:
@@ -75,7 +77,7 @@ parts:
       'bin/subiquity-configure-apt': usr/bin/subiquity-configure-apt
       'bin/subiquity-configure-run': usr/bin/subiquity-configure-run
   users-and-groups:
-    plugin: dump
+    plugin: nil
     build-packages:
       - user-setup
     override-build: |
@@ -88,7 +90,7 @@ parts:
       - users-and-groups
       - reserved-usernames
   kbdnames:
-    plugin: dump
+    plugin: nil
     build-packages:
       - console-setup
       - locales
@@ -100,6 +102,7 @@ parts:
       - kbdnames.txt
   font:
     plugin: dump
+    source: ./
     organize:
       font/subiquity.psf: subiquity.psf
     stage:
@@ -111,4 +114,4 @@ parts:
     source: https://github.com/CanonicalLtd/probert.git
     source-type: git
     source-commit: 45413866bbda3345d029ebb2b1f5faa9552372bf
-    requirements: requirements.txt
+    requirements: [requirements.txt]
